@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URL!).then(() => console.log("Database is C
 env.config();
 app.use(cors(
     {
-        origin: "https://second-brain-flax.vercel.app",
+        origin: "https://second-brain-p8zl.vercel.app",
         methods: ['GET', 'POST', 'DELETE', 'PUT']
     }
 
