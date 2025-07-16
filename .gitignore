@@ -1,0 +1,9 @@
+node_modules
+.env
+dist/
+build/
+*.js.map
+tsconfig.tsbuildinfo
+src/uploads/
+logs/
+*.log
