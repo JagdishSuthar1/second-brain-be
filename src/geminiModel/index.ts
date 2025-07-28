@@ -1,15 +1,13 @@
-import { ChatOllama } from "@langchain/ollama";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-// const ollamaModel = new ChatOllama({
-//     baseUrl: "http://localhost:11434",
-//     model: "llama3.2:1b"
-// });
-import envFile from "dotenv";
-envFile.config()
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const geminiModel = new ChatGoogleGenerativeAI({
-    model : "gemini-1.5-pro",
-    apiKey : process.env.GEMINI_API_KEY
-})
+  model: "models/gemini-1.5-pro",
+  apiKey: process.env.GEMINI_API_KEY,
+  temperature: 0.7,
+});
 
-export default geminiModel
+export default geminiModel;
+

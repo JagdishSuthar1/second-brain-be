@@ -1,22 +1,14 @@
-// import axios from "axios";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
+import dotenv from "dotenv";
 
-// async function createEmbeddings(text:string) {
-//     const response = await axios.post("http://localhost:11434/api/embeddings" , {
-//         model : "nomic-embed-text:v1.5",
-//         prompt : text
-//     })
-
-
-//     return response.data.embedding
-// }
+dotenv.config();
 
 const embeddings = new GoogleGenerativeAIEmbeddings({
-  model: "textembedding-gecko@001",
+  model:  "models/embedding-001",
+  apiKey: process.env.GEMINI_API_KEY,
 });
 
-export default async function createEmbeddings(text : string) {
-    const vectors = await embeddings.embedQuery(text);
-    return vectors;
+export default async function createEmbeddings(text: string) {
+  const vectors = await embeddings.embedQuery(text);
+  return vectors;
 }
-
