@@ -19,7 +19,6 @@
     "@langchain/community": "^0.3.43",
     "@langchain/core": "^0.3.62",
     "@langchain/google-genai": "^0.2.14",
-    "@langchain/groq": "^0.2.3",
     "@langchain/ollama": "^0.2.0",
     "@types/cors": "^2.8.18",
     "@types/crypto-js": "^4.2.2",
@@ -37,7 +36,6 @@
     "langchain": "^0.3.30",
     "mongoose": "^8.14.2",
     "multer": "^2.0.0",
-    "openai": "^5.10.2",
     "socket.io": "^4.8.1",
     "typescript": "^5.8.3",
     "zod": "^3.24.4"
