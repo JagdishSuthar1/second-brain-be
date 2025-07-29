@@ -6,12 +6,12 @@ import { MiddlewareOptions } from "mongoose";
 
 export const GetAllChats: RequestHandler = async (req, res) => {
     const { userId } = req.params;
-    console.log(userId);
+    ////console.log(userId);
 
     if (userId) {
         try {
             const results = await one2oneChatModel.find({ members: userId }).populate("members");
-            // console.log("results fetching chats: ", results);
+            // ////console.log("results fetching chats: ", results);
             
             const dummy = [...results];
             let newArray = []
@@ -38,7 +38,7 @@ export const GetAllChats: RequestHandler = async (req, res) => {
                 }
             }
 
-            // console.log("new array", newArray)
+            // ////console.log("new array", newArray)
 
 
 
@@ -147,7 +147,7 @@ export const CreateFriendChat: RequestHandler = async (req, res) => {
     if (friendId) {
         try {
             const findChat = await one2oneChatModel.findOne({ "members": { $all: [userId, friendId] } }).populate("members");
-            // console.log("findChat", findChat);
+            // ////console.log("findChat", findChat);
 
 
             if (findChat != null) {
@@ -176,7 +176,7 @@ export const CreateFriendChat: RequestHandler = async (req, res) => {
                     }
                 }
 
-                // console.log("new array after changing" , newArray)
+                // ////console.log("new array after changing" , newArray)
                 res.json({
                     success: false,
                     message: "Already chat is Present",
@@ -217,7 +217,7 @@ export const CreateFriendChat: RequestHandler = async (req, res) => {
                 }
 
 
-                // console.log("result after creating", result)
+                // ////console.log("result after creating", result)
                 res.status(200).json({
                     success: true,
                     message: "friend Chat created Successfully",

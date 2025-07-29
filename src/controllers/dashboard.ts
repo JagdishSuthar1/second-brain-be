@@ -16,11 +16,11 @@ type ParamsType = {
 }
 export const UserContent: RequestHandler<ParamsType, ContentTypeResponse, {}> = async (req, res) => {
     const { userId } = req.params;
-    console.log(userId);
+    //console.log(userId);
     if (userId != undefined) {
         try {
             const content = await contentModel.find({ userId });
-            // console.log(content);
+            // //console.log(content);
             if (content) {
                 res.status(200).json({
                     success: true,
@@ -36,7 +36,7 @@ export const UserContent: RequestHandler<ParamsType, ContentTypeResponse, {}> = 
             }
         }
         catch (err) {
-            console.log(err);
+            //console.log(err);
             res.status(404).json({
                 success: false,
                 message: "Database Issue",
@@ -63,7 +63,7 @@ export const ContentType: RequestHandler<SpecificContentType, ContentTypeRespons
     if (userId) {
         try {
             const content = await contentModel.find({ userId, type }).populate("allTags");
-            // console.log(content);
+            // //console.log(content);
             if (content) {
                 res.status(200).json({
                     success: true,
@@ -79,7 +79,7 @@ export const ContentType: RequestHandler<SpecificContentType, ContentTypeRespons
             }
         }
         catch (err) {
-            console.log(err);
+            //console.log(err);
             res.status(404).json({
                 success: false,
                 message: "Database Issue",
@@ -116,7 +116,7 @@ export const AddTag: RequestHandler<{ userId: string }, ContentTypeResponse, Tag
 
         }
         catch (err) {
-            console.log(err);
+            //console.log(err);
             res.status(404).json({
                 success: false,
                 message: "Database Issue",
@@ -154,7 +154,7 @@ export const AddContent: RequestHandler<{ userId: string }, ContentTypeResponse,
 
     if (userId != null && contentBody != null) {
         try {
-            console.log("In the add content ", contentBody)
+            //console.log("In the add content ", contentBody)
             const stringForEmbedd = `link : ${contentBody.link} , type : ${contentBody.type} , title : ${contentBody.title} , data : ${contentBody.data}`
             const embeddingFromOllama = await createEmbeddings(stringForEmbedd);
             await contentModel.create({
@@ -184,7 +184,7 @@ export const AddContent: RequestHandler<{ userId: string }, ContentTypeResponse,
 
         }
         catch (err) {
-            console.log(err);
+            //console.log(err);
             res.status(404).json({
                 success: false,
                 message: "Database Issue",
@@ -230,7 +230,7 @@ export const DeleteContent: RequestHandler<DeleteContentType, ContentTypeRespons
 
         }
         catch (err) {
-            console.log(err);
+            //console.log(err);
             res.status(404).json({
                 success: false,
                 message: "Database Issue",
@@ -255,9 +255,9 @@ export const GetContentById: RequestHandler<ContentById, ContentTypeResponse, {}
 
     if (contentId != undefined) {
         try {
-            console.log(contentId);
+            //console.log(contentId);
             const content = await contentModel.findById(contentId);
-            console.log(content);
+            //console.log(content);
 
             if (content) {
                 res.status(200).json({
@@ -274,7 +274,7 @@ export const GetContentById: RequestHandler<ContentById, ContentTypeResponse, {}
             }
         }
         catch (err) {
-            console.log(err);
+            //console.log(err);
             res.status(404).json({
                 success: false,
                 message: "Database Issue",

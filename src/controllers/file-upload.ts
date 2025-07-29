@@ -4,14 +4,14 @@ import { ImageAndVideoUploader } from "../cloudinary";
 
 export const FileUploadToCloudinary : RequestHandler = async (req, res)=> {
     if(!req.file) {
-        console.log("file is missing")
+        //console.log("file is missing")
         res.json({
             success : false,
             message : "File is missing"
         })
     }
     else {
-        console.log("in the upload router")
+        //console.log("in the upload router")
         try {
             const data = await ImageAndVideoUploader(req.file.path);
             res.json({
@@ -22,7 +22,7 @@ export const FileUploadToCloudinary : RequestHandler = async (req, res)=> {
 
         }
         catch(err) {
-            console.log(err);
+            //console.log(err);
             res.json({
                 success : false,
                 message : "Error in file uploading",

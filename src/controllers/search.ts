@@ -14,7 +14,7 @@ export const GetTop2Document: RequestHandler = async (req, res) => {
     const { text } = req.body;
 
     if (text != null) {
-        console.log(text);
+        //console.log(text);
         try {
             const searchEmbedding = await createEmbeddings(text);
             // here i am calling to mongodb with this embeddings;
@@ -41,7 +41,7 @@ export const GetTop2Document: RequestHandler = async (req, res) => {
                 }
             ]).toArray();
 
-            console.log(results);
+            //console.log(results);
             res.status(200).json({
                 success: true,
                 message: "Suggestion fetched Successfully",
@@ -50,7 +50,7 @@ export const GetTop2Document: RequestHandler = async (req, res) => {
 
         }
         catch (err) {
-            console.log(err);
+            //console.log(err);
             res.json({
                 success: false,
                 message: "Embeddings not created"
@@ -64,7 +64,7 @@ export const GetTop2Document: RequestHandler = async (req, res) => {
 
 export const GetSummaryFromAi: RequestHandler = async (req, res) => {
     const { reqQuery, documents } = req.body;
-    console.log(req.body)
+    //console.log(req.body)
     // if (reqQuery && documents) {
     try {
         const docs = [];
@@ -76,7 +76,7 @@ export const GetSummaryFromAi: RequestHandler = async (req, res) => {
             docs.push(newdoc)
         }
 
-        console.log(docs);
+        //console.log(docs);
         const zodSchema = z.object({
             title: z.string().describe("Title"),
             detailInformation: z.string().describe("detail information about the query"),
@@ -117,7 +117,7 @@ RULES:
             context: docs
         })
 
-        // console.log(response);
+        // //console.log(response);
         res.status(200).json({
             success: true,
             message: "Ai Response fetched Successfully",
@@ -126,7 +126,7 @@ RULES:
     }
 
     catch (err) {
-        console.log(err);
+        //console.log(err);
         res.status(400).json({
             success: false,
             message: "Ai is not working",
@@ -150,13 +150,13 @@ export const GetAllUsers: RequestHandler = async (req, res) => {
     const { query } = req.body;
 
     if (query != null) {
-        console.log(query);
+        //console.log(query);
         try {
             const regex = new RegExp(query, "i");
             const results = await userModel.find({ username: regex });
 
 
-            console.log(results);
+            //console.log(results);
             res.status(200).json({
                 success: true,
                 message: "Users fetched Successfully",
@@ -165,7 +165,7 @@ export const GetAllUsers: RequestHandler = async (req, res) => {
 
         }
         catch (err) {
-            console.log(err);
+            //console.log(err);
             res.json({
                 success: false,
                 message: "Embeddings not created"

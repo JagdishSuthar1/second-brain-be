@@ -59,71 +59,71 @@ const io = new Server(server , {
 
 let connectedUser : string[]= []
 
-io.on("connection" , function(socket) {
-    console.log("User is connected" , socket.id);
+// io.on("connection" , function(socket) {
+//     console.log("User is connected" , socket.id);
 
-    socket.on("setup" , (data)=>{
-        // socket.userId = data;
-        console.log( "setup", data);
-        socket.join(data);
-        if(!connectedUser.includes(data)) {
-            connectedUser.push(data)
-        }
+//     socket.on("setup" , (data)=>{
+//         // socket.userId = data;
+//         console.log( "setup", data);
+//         socket.join(data);
+//         if(!connectedUser.includes(data)) {
+//             connectedUser.push(data)
+//         }
 
-        console.log("joined rooms" , Array.from(socket.rooms))
-        const allRooms = io.sockets.adapter.rooms;
+//         console.log("joined rooms" , Array.from(socket.rooms))
+//         const allRooms = io.sockets.adapter.rooms;
 
-        socket.emit("available-users", connectedUser);
+//         socket.emit("available-users", connectedUser);
 
-        for(let [room , sockets] of allRooms) {
-            io.to(room).emit("user-connected" , data);
-        }
-    })
+//         for(let [room , sockets] of allRooms) {
+//             io.to(room).emit("user-connected" , data);
+//         }
+//     })
 
-    socket.on("join-chat" , function(roomId) {
-        socket.join(roomId);
-        console.log("join-chat" , roomId)
-    })
+//     socket.on("join-chat" , function(roomId) {
+//         socket.join(roomId);
+//         console.log("join-chat" , roomId)
+//     })
 
-    socket.on("typing" , (room)=> {
-        socket.to(room).emit("typing", true)
-    })
+//     socket.on("typing" , (room)=> {
+//         socket.to(room).emit("typing", true)
+//     })
 
-    socket.on("stop-typing", (room)=>{
-        socket.to(room).emit("stop typing" , true)
-    })
+//     socket.on("stop-typing", (room)=>{
+//         socket.to(room).emit("stop typing" , true)
+//     })
 
-    socket.on("leave-group", (room)=>{
-        socket.leave(room);
-    })
+//     socket.on("leave-group", (room)=>{
+//         socket.leave(room);
+//     })
 
-    socket.on("new-message" , (data)=>{
-        console.log("new-message" , data)
-        socket.to(data.roomId).emit("new-message" , data);
-    })
+//     socket.on("new-message" , (data)=>{
+//         console.log("new-message" , data)
+//         socket.to(data.roomId).emit("new-message" , data);
+//     })
 
-    socket.on("disconnecting" , ()=> {
-        const SocketRooms = Array.from(socket.rooms)
-        console.log("socket-rooms" , SocketRooms)
-        console.log("user disconnected", SocketRooms[1]);
+//     socket.on("disconnecting" , ()=> {
+//         const SocketRooms = Array.from(socket.rooms)
+//         console.log("socket-rooms" , SocketRooms)
+//         console.log("user disconnected", SocketRooms[1]);
 
-        //here i am removing the user
-        for(let i = 0; i < connectedUser.length; i++) {
-            if(connectedUser[i] == SocketRooms[1]) {
-                connectedUser.splice(i , 1);
-                break;
-            }
-        }
+//         //here i am removing the user
+//         for(let i = 0; i < connectedUser.length; i++) {
+//             if(connectedUser[i] == SocketRooms[1]) {
+//                 connectedUser.splice(i , 1);
+//                 break;
+//             }
+//         }
 
-        for(let i = 0; i < SocketRooms.length; i++) {
-            console.log(SocketRooms[i])
-            io.to(SocketRooms[i]).emit("user-disconnected" , SocketRooms[1]);
-        }
-    })
+//         for(let i = 0; i < SocketRooms.length; i++) {
+//             console.log(SocketRooms[i])
+//             io.to(SocketRooms[i]).emit("user-disconnected" , SocketRooms[1]);
+//         }
+//     })
     
-    socket.on("disconnect" , ()=>{
-        console.log("someone-isdisconnected");
-    })
+//     socket.on("disconnect" , ()=>{
+//         console.log("someone-isdisconnected");
+//     })
 
 
-})
+// })

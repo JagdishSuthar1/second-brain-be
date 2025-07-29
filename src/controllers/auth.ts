@@ -32,7 +32,7 @@ export const SignUp: RequestHandler<{}, AuthResponse, SignUpInput> = async (req,
             }
             catch (err) {
 
-                console.log(err);
+                //console.log(err);
                 res.status(404).json({
                     success: false,
                     message: "Database Error"
@@ -103,7 +103,7 @@ export const SignIn: RequestHandler<{}, TokenResponse, SignInInput> = async (req
             }
             catch (err) {
 
-                console.log(err);
+                //console.log(err);
                 res.status(404).json({
                     success: false,
                     message: "Database Error"

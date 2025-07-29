@@ -13,7 +13,7 @@ export const SharedContent : RequestHandler = async (req, res)=> {
             const safeId = decodeURIComponent(id)
             const byteId = CryptoJs.AES.decrypt(safeId, secretKey);
             const originalId = byteId.toString(CryptoJs.enc.Utf8)
-            console.log(originalId);
+            //console.log(originalId);
             const results = await contentModel.find({userId : originalId});
             if(results) {
                 res.json({
@@ -31,7 +31,7 @@ export const SharedContent : RequestHandler = async (req, res)=> {
             
         }
         catch(err) {
-            console.log(err);
+            //console.log(err);
             res.json({
                 success : false,
                 message : "Database Issue",
@@ -67,7 +67,7 @@ export const ShareContentType: RequestHandler<SpecificContentType, ContentTypeRe
     if (originalId) {
         try {
             const content = await contentModel.find({ userId : originalId, type }).populate("allTags");
-            // console.log(content);
+            // //console.log(content);
             if (content) {
                 res.status(200).json({
                     success: true,
@@ -83,7 +83,7 @@ export const ShareContentType: RequestHandler<SpecificContentType, ContentTypeRe
             }
         }
         catch (err) {
-            console.log(err);
+            //console.log(err);
             res.status(404).json({
                 success: false,
                 message: "Database Issue",

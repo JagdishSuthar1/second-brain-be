@@ -10,7 +10,7 @@ export const SendMessage: RequestHandler = async (req, res) => {
 
     if (userId && friendId) {
         try {
-            // console.log("type of : ", typeof message)
+            // //console.log("type of : ", typeof message)
             const getFromDb = await messageModel.create({
                 members: [userId, friendId],
                 message: message
@@ -60,7 +60,7 @@ export const SendMessage: RequestHandler = async (req, res) => {
         
     }
         catch (err) {
-        console.log(err);
+        //console.log(err);
         res.json({
             success: false,
             message: "Database Issue"
@@ -81,12 +81,12 @@ export const SendMessage: RequestHandler = async (req, res) => {
 export const GetAllMessage: RequestHandler = async (req, res) => {
     const { userId, friendId } = req.params;
 
-    // console.log("message router")
+    // //console.log("message router")
     if (userId && friendId) {
-        // console.log("user : ", userId  + " and friendId ", friendId )
+        // //console.log("user : ", userId  + " and friendId ", friendId )
         try {
             const results = await messageModel.find({ "members": { $all: [userId, friendId] } }).populate("members");
-            // console.log("results from message : ", results)
+            // //console.log("results from message : ", results)
             if (results.length >= 0) {
                 const dummy = results;
                 let newArray = [];
@@ -113,7 +113,7 @@ export const GetAllMessage: RequestHandler = async (req, res) => {
 
                         newArray.push(newItem);
                     }
-                    // console.log("new array of messages", newArray)
+                    // //console.log("new array of messages", newArray)
 
 
                 }
@@ -133,7 +133,7 @@ export const GetAllMessage: RequestHandler = async (req, res) => {
             }
         }
         catch (err) {
-            console.log(err);
+            //console.log(err);
             res.json({
                 success: false,
                 message: "Database Issue"
@@ -155,7 +155,7 @@ export const SendGroupMessage: RequestHandler = async (req, res) => {
 
     if (groupId && userId && message) {
         try {
-            // console.log("In send Group Message ");
+            // //console.log("In send Group Message ");
             const getFromDb = await groupMessageModel.create({
                 groupId: groupId,
                 userId: userId,
@@ -171,7 +171,7 @@ export const SendGroupMessage: RequestHandler = async (req, res) => {
             })
         }
         catch (err) {
-            console.log(err);
+            //console.log(err);
             res.json({
                 success: false,
                 message: "Database Issue"
@@ -195,7 +195,7 @@ export const GetAllGroupMessage: RequestHandler = async (req, res) => {
 
     if (groupId) {
         try {
-            // console.log("In send Group Message ");
+            // //console.log("In send Group Message ");
             const results = await groupMessageModel.find({
                 groupId: groupId
             }).populate("userId").sort({ createdAt: 1 })
@@ -208,7 +208,7 @@ export const GetAllGroupMessage: RequestHandler = async (req, res) => {
             })
         }
         catch (err) {
-            console.log(err);
+            //console.log(err);
             res.json({
                 success: false,
                 message: "Database Issue"
