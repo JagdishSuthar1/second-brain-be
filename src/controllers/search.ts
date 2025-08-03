@@ -79,8 +79,11 @@ export const GetSummaryFromAi: RequestHandler = async (req, res) => {
         //console.log(docs);
         const zodSchema = z.object({
             title: z.string().describe("Title"),
-            detailInformation: z.string().describe("detail information about the query"),
-            keyPoints: z.array(z.string()).describe("Array of 20 key points"),
+            summary: z.string().describe("Summary about the query"),
+            keyPoints: z.array(z.string()).describe("Array of 10 key points"),
+            detailInformation: z.string().describe("detail Information about the query"),
+
+
         })
 
         // const prompt = ChatPromptTemplate.fromTemplate("Generate the contents for the query : {query} with the given context : {context} in the following json schema : {instructions}");
@@ -90,8 +93,10 @@ export const GetSummaryFromAi: RequestHandler = async (req, res) => {
 
 
   "title": string,                  // A short title summarizing the content
-  "detailInformation": string,     // Generate A detailed explanation related to the input with the context and your knowledge
+  "summary": string,     // Generate A Summary related to the input with the context and your knowledge
   "keyPoints": string[20]          // Exactly 20 key points as an array of strings
+  "detailInformation": string,     // Generate A Detail explanation related to the input with the context and your knowledge
+
 
 
 RULES:
@@ -117,7 +122,6 @@ RULES:
             context: docs
         })
 
-        // //console.log(response);
         res.status(200).json({
             success: true,
             message: "Ai Response fetched Successfully",
@@ -125,8 +129,8 @@ RULES:
         })
     }
 
+
     catch (err) {
-        //console.log(err);
         res.status(400).json({
             success: false,
             message: "Ai is not working",
